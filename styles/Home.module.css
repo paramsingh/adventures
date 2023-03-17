@@ -37,6 +37,8 @@
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
+  max-width: 650px;
+  white-space: pre-line;
 }
 
 .grid {
@@ -62,6 +64,7 @@
 .card h2 {
   font-weight: 600;
   margin-bottom: 0.7rem;
+  max-width: 650px;
 }
 
 .card p {
