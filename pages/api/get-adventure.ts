@@ -1,11 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "..";
 import { Configuration, OpenAIApi } from "openai";
-import { Content } from "next/font/google";
-
-type Data = {
-  conversation: Message[];
-};
 
 type Error = {
   message: string;
@@ -19,16 +14,21 @@ Content
 
 Choices
 
-Where Content is the text you want to send to the user and Choices is a list of choices the user can make. 
+Where Content is the text you want to send to the user and Choices is a list of choices the user can make.
 The choices should always be numbered 1-4.
+
+It is absolutely imperative that you end the story near the 10th choice the user makes.
+However, use your best judgement here. Don't compromise the story for the sake of 1 extra prompt.
+Just know that the game should NOT go on for more than 15 choices.
 `;
 
 const PROMPT = `
-Play a text based adventure game in the fantasy genre with me set in ancient India. 
+Play a text based adventure game. Choose a genre yourself from the following genres: "fantasy", "scifi", "historical".
+Do not tell me the genre.
 
 Give me 4 choices on what to do. Wait and ask me for what choice I want to make.
-Move the story forward according to my choice and give me more choices. 
-Repeat this until the game ends. Try to end the game with a reasonable conclusion 
+Move the story forward according to my choice and give me more choices.
+Repeat this until the game ends. Try to end the game with a reasonable conclusion
 around the time I have made a total 10 choices. Plan your story accordingly.
 
 Make the game as imaginative and compelling as you can.
