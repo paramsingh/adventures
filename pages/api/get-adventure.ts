@@ -13,9 +13,8 @@ Try to make the story interesting and action-packed from the beginning.
 
 Each message you send contains a prompt for the user to respond to. Each message you send should be in the following format:
 
-Content
-
-Choices
+{Content}
+{Choices}
 
 Where Content is the text you want to send to the user to progress the story
 and Choices is a list of choices the user can make. The choices should always be numbered 1-4.
