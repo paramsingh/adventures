@@ -15,6 +15,7 @@ const Button = styled.button`
 const StoryText = styled.p`
   margin-bottom: 10px;
   margin-top: 10px;
+  font-family: "Inconsolata", monospace;
 `;
 
 export type Message = {
@@ -52,6 +53,12 @@ export default function Home() {
         <meta name="description" content="text adventures every day" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
       <main className={styles.main}>
         <div className={styles.code}>
