@@ -2,19 +2,8 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 import { getAdventure } from "@/api-client";
-import styled from "styled-components";
-
-const Button = styled.button`
-  margin-top: 10px;
-  margin-right: 10px;
-  width: 50px;
-`;
-
-const StoryText = styled.p`
-  margin-bottom: 10px;
-  margin-top: 10px;
-  font-family: "Inconsolata", monospace;
-`;
+import Link from "next/link";
+import { Story, StoryText } from "@/components/Story";
 
 export type Message = {
   role: "user" | "assistant" | "system";
@@ -60,27 +49,28 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.code}>
-          {conversation.map((message) => {
-            return (
-              <>
-                <StoryText>
-                  {message.role === "user"
-                    ? `You chose ${message.content.toString()}`
-                    : message.content}
-                </StoryText>
-                <hr />
-              </>
-            );
-          })}
-          {loading && <StoryText>Loading...</StoryText>}
-          {!loading && (
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              <Button onClick={() => choose(1)}>1</Button>
-              <Button onClick={() => choose(2)}>2</Button>
-              <Button onClick={() => choose(3)}>3</Button>
-              <Button onClick={() => choose(4)}>4</Button>
-            </div>
-          )}
+          <StoryText style={{ marginBottom: "10px" }}>
+            Created by{" "}
+            <Link
+              href="https://twitter.com/iliekcomputers"
+              style={{ textDecoration: "underline" }}
+            >
+              iliekcomputers
+            </Link>
+            . This uses{" "}
+            <Link
+              href="https://chat.openai.com"
+              style={{ textDecoration: "underline" }}
+            >
+              ChatGPT
+            </Link>
+            .
+          </StoryText>
+          <Story
+            conversation={conversation}
+            loading={loading}
+            choose={choose}
+          />
         </div>
       </main>
     </>
