@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "..";
 import { Configuration, OpenAIApi } from "openai";
+import { prompts } from "./prompts";
 
 type Error = {
   message: string;
@@ -22,7 +23,8 @@ The content should be as detailed as possible.
 
 It is absolutely imperative that you end the story near the 10th choice the user makes.
 However, use your best judgement here. Don't compromise the story for the sake of 1 extra prompt.
-Just know that the game should NOT go on for more than 15 choices.
+Just know that the game should NOT go on for more than 15 choices. If the story is not finished,
+invent a way to end the story by making the main character die.
 `;
 
 const PROMPT = `
@@ -59,6 +61,10 @@ export default async function handler(
   };
 
   const userConversation = JSON.parse(req.body) as Message[];
+  if (userConversation.length === 0) {
+    res.status(200).json([{ role: "assistant", content: getTodaysPrompt() }]);
+    return;
+  }
   const c = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -70,3 +76,19 @@ export default async function handler(
   const answer = completion.data.choices[0].message as Message;
   res.status(200).json([...userConversation, answer]);
 }
+
+const getTodaysPrompt = (): string => {
+  const index = getNumberOfDays() % prompts.length;
+  return prompts[index].prompt;
+};
+
+const getNumberOfDays = () => {
+  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+  const firstDate = new Date("2023-03-17");
+  const secondDate = new Date();
+  const diffDays = Math.round(
+    Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
+  );
+
+  return diffDays;
+};
