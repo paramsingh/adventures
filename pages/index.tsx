@@ -64,7 +64,11 @@ export default function Home() {
             >
               ChatGPT
             </Link>
-            .
+            .{" "}
+            <Link href="/about" style={{ textDecoration: "underline" }}>
+              More details
+            </Link>{" "}
+            here.
           </StoryText>
           <Story
             conversation={conversation}
