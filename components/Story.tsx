@@ -1,5 +1,6 @@
 import { Message } from "@/pages";
 import Link from "next/link";
+import { useState } from "react";
 import styled from "styled-components";
 
 export const Button = styled.button`
@@ -23,6 +24,8 @@ export const Story = ({
   loading: boolean;
   choose: (option: number) => void;
 }) => {
+  const end =
+    conversation[conversation.length - 1]?.content.includes("The End");
   return (
     <>
       <hr style={{ marginBottom: "20px" }} />
@@ -39,13 +42,25 @@ export const Story = ({
         );
       })}
       {loading && <StoryText>Loading...</StoryText>}
-      {!loading && (
+      {!loading && !end && (
         <div style={{ display: "flex", flexDirection: "row" }}>
           <Button onClick={() => choose(1)}>1</Button>
           <Button onClick={() => choose(2)}>2</Button>
           <Button onClick={() => choose(3)}>3</Button>
           <Button onClick={() => choose(4)}>4</Button>
         </div>
+      )}
+      {end && (
+        <StoryText>
+          <a
+            onClick={() => {
+              window.location.reload();
+            }}
+            style={{ textDecoration: "underline", cursor: "pointer" }}
+          >
+            Play again?
+          </a>
+        </StoryText>
       )}
     </>
   );

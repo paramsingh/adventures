@@ -25,6 +25,8 @@ It is absolutely imperative that you end the story near the 10th choice the user
 However, use your best judgement here. Don't compromise the story for the sake of 1 extra prompt.
 Just know that the game should NOT go on for more than 15 choices. If the story is not finished,
 invent a way to end the story by making the main character die.
+
+Once the story is finished, send a message to the user that ends with "The End" in a separate line.
 `;
 
 const PROMPT = `
