@@ -26,7 +26,6 @@ export default function About() {
             </Link>
           </StoryText>
           <hr />
-          <StoryText>This is a work in progress.</StoryText>
           <StoryText>
             Every day, a new prompt starts the game for everyone. Things diverge
             from there. Your choices define where the story goes.
