@@ -34,12 +34,41 @@ export const prompts = [
 `,
   },
   {
-    prompt: `You are an adventurous explorer who loves to discover new lands and cultures in ancient India. You have heard stories of a mysterious island called Lanka, where demons rule over humans under their king Ravana’s tyranny .You decide to embark on a voyage across the ocean to reach Lanka and see it for yourself .Do you:
+    prompt: `You are Ravi, a young hacker living in Mumbai in the year 2050. You have always dreamed of joining the Resistance, a group of rebels fighting against the oppressive regime of the Global Corporation. The Corporation controls everything from politics to media to technology, and has a ruthless army of cyborgs and drones to enforce its will.
 
-1. Join forces with Rama, the exiled prince, who is also heading towards Lanka, to rescue his wife Sita, who has been kidnapped by Ravana .
-2. Ally yourself with Ravana, the demon king, who offers you wealth, power, and knowledge, if you help him defeat Rama.
-3. Remain neutral, and explore Lanka on your own, avoiding both sides .
-4. Betray both sides, and try to steal Sita away from Ravana, and claim her as your own.
+One day, you receive a mysterious message on your hacked phone. It says: "Ravi, we need your help. Meet us at the old railway station at midnight. Bring your hacking skills and your courage. This is your chance to join the Resistance. Don't let us down."
+
+You feel a surge of excitement and fear. You have always wanted to do something meaningful with your life, but you also know that this could be a trap or a suicide mission. What will you do next?
+
+1. Go to the old railway station at midnight and meet the Resistance.
+2. Ignore the message and stay home. You don’t want to get involved in dangerous things.
+3. Reply to the message and ask for more details. Who are they and how do they know you?
+4. Report the message to the Corporation. Maybe they will reward you for your loyalty.
+`,
+  },
+  {
+    prompt: `You are a young prince/princess of a small kingdom in ancient India. You have always dreamed of exploring the world beyond your palace walls, but your parents forbid you to do so. One day, you find a secret passage that leads to a hidden chamber where an old sage awaits you. He offers to teach you the secrets of magic and adventure if you follow him. Do you:
+1. Accept his offer and leave with him.
+2. Decline his offer and return to your palace.
+3. Ask him more questions about himself and his motives.
+4. Attack him and try to escape.`,
+  },
+  {
+    prompt: `You are a brave warrior of a nomadic tribe that roams the vast plains of ancient India. You have earned respect and fame for your skills in combat and hunting. One day, while scouting for a new campsite, you encounter a group of bandits who have captured a princess from a nearby kingdom. They demand a ransom for her release, but you sense they are lying. Do you:
+
+1. Challenge the bandits to a fight and rescue the princess.
+2. Negotiate with the bandits and try to lower the ransom.
+3. Pretend to join the bandits and betray them later.
+4. Ignore the bandits and continue your scouting.
+`,
+  },
+  {
+    prompt: `You are a cunning thief who specializes in stealing jewels and artifacts from temples and palaces in ancient India. You have heard rumors of a legendary treasure hidden in the city of Ujjain, guarded by a powerful sorcerer. You decide to infiltrate the city and find the treasure before anyone else does. Do you:
+
+1. Disguise yourself as a pilgrim and enter the city through the main gate.
+2. Hire a boatman and sneak into the city through the river.
+3. Bribe a guard and climb over the city wall at night.
+4. Wait for an opportunity and follow another thief who has entered the city.
 `,
   },
   {
