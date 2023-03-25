@@ -1,7 +1,7 @@
 import { Message } from "@/pages";
-import Link from "next/link";
-import { useState } from "react";
 import styled from "styled-components";
+import { StoryMessage } from "./StoryMessage";
+import { UserChoice } from "./UserChoice";
 
 export const Button = styled.button`
   margin-top: 10px;
@@ -11,7 +11,6 @@ export const Button = styled.button`
 
 export const StoryText = styled.p`
   margin-bottom: 10px;
-  margin-top: 10px;
   font-family: "Inconsolata", monospace;
 `;
 
@@ -32,12 +31,15 @@ export const Story = ({
       {conversation.map((message) => {
         return (
           <>
-            <StoryText>
-              {message.role === "user"
-                ? `You chose ${message.content.toString()}`
-                : message.content}
-            </StoryText>
-            <hr />
+            {message.role === "user" ? (
+              <UserChoice choice={message.content} />
+            ) : (
+              <StoryMessage
+                firstMessage={conversation[0].content}
+                content={message.content}
+              />
+            )}
+            <hr style={{ marginBottom: "20px" }} />
           </>
         );
       })}

@@ -7,3 +7,11 @@ export const getAdventure = async (conversation: Message[]) => {
   });
   return response.json();
 };
+
+export const getImage = async (content: string, firstMessage: string) => {
+  const response = await fetch("/api/get-image", {
+    method: "POST",
+    body: JSON.stringify({ content: content, firstMessage: firstMessage }),
+  });
+  return response.json();
+};

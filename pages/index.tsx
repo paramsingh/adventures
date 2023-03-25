@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import { getAdventure } from "@/api-client";
 import Link from "next/link";
 import { Story, StoryText } from "@/components/Story";
+import styled from "styled-components";
+
+const AlwaysUnderlinedLink = styled.a`
+  text-decoration: underline;
+`;
 
 export type Message = {
   role: "user" | "assistant" | "system";
@@ -51,23 +56,21 @@ export default function Home() {
         <div className={styles.code}>
           <StoryText style={{ marginBottom: "10px" }}>
             Created by{" "}
-            <Link
-              href="https://twitter.com/iliekcomputers"
-              style={{ textDecoration: "underline" }}
-            >
+            <AlwaysUnderlinedLink href="https://twitter.com/iliekcomputers">
               iliekcomputers
-            </Link>
+            </AlwaysUnderlinedLink>
             . This uses{" "}
-            <Link
-              href="https://chat.openai.com"
-              style={{ textDecoration: "underline" }}
-            >
+            <AlwaysUnderlinedLink href="https://chat.openai.com">
               ChatGPT
-            </Link>
+            </AlwaysUnderlinedLink>{" "}
+            and{" "}
+            <AlwaysUnderlinedLink href="https://openai.com/product/dall-e-2">
+              Dall-E
+            </AlwaysUnderlinedLink>
             .{" "}
-            <Link href="/about" style={{ textDecoration: "underline" }}>
+            <AlwaysUnderlinedLink href="/about">
               More details
-            </Link>{" "}
+            </AlwaysUnderlinedLink>{" "}
             here.
           </StoryText>
           <Story

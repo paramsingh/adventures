@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "..";
 import { Configuration, OpenAIApi } from "openai";
 import { prompts } from "./prompts";
+import { getOpenAIClient } from "@/utils/get-openai-client";
 
 type Error = {
   message: string;
@@ -67,10 +68,7 @@ export default async function handler(
     res.status(200).json([{ role: "assistant", content: getTodaysPrompt() }]);
     return;
   }
-  const c = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-  const openai = new OpenAIApi(c);
+  const openai = getOpenAIClient();
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [systemMessage, firstMessage, ...userConversation],
