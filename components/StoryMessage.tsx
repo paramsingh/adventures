@@ -4,19 +4,24 @@ import { StoryText } from "./Story";
 
 export const StoryMessage = ({
   content,
-  firstMessage,
+  firstMessageContent,
 }: {
   content: string;
-  firstMessage: string;
+  firstMessageContent: string;
 }) => {
   const [imageURL, setImageURL] = useState<string | null>(null);
+
+  // this effect gets the image from Dall-E
   useEffect(() => {
-    getImage(content.split("\n")[0], firstMessage.split("\n")[0]).then(
-      (data) => {
-        setImageURL(data.url);
-      }
-    );
-  }, [content, firstMessage]);
+    const contentWithoutOptions = removeOptionsFromContent(content);
+    const firstMessageWithoutOptions =
+      removeOptionsFromContent(firstMessageContent);
+
+    getImage(contentWithoutOptions, firstMessageWithoutOptions).then((data) => {
+      setImageURL(data.url);
+    });
+  }, [content, firstMessageContent]);
+
   return (
     <div
       style={{
@@ -25,6 +30,7 @@ export const StoryMessage = ({
         gap: "15px",
         flexWrap: "wrap",
         marginBottom: "20px",
+        justifyContent: "center",
       }}
     >
       {imageURL && (
@@ -38,4 +44,8 @@ export const StoryMessage = ({
       </div>
     </div>
   );
+};
+
+const removeOptionsFromContent = (content: string) => {
+  return content.split("\n")[0];
 };

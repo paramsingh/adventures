@@ -54,7 +54,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.code}>
-          <StoryText style={{ marginBottom: "10px" }}>
+          <StoryText>
             Created by{" "}
             <AlwaysUnderlinedLink href="https://twitter.com/iliekcomputers">
               iliekcomputers

@@ -4,14 +4,17 @@ import { StoryMessage } from "./StoryMessage";
 import { UserChoice } from "./UserChoice";
 
 export const Button = styled.button`
-  margin-top: 10px;
   margin-right: 10px;
   width: 50px;
 `;
 
 export const StoryText = styled.p`
-  margin-bottom: 10px;
   font-family: "Inconsolata", monospace;
+`;
+
+export const Line = styled.hr`
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 export const Story = ({
@@ -27,22 +30,10 @@ export const Story = ({
     conversation[conversation.length - 1]?.content.includes("The End");
   return (
     <>
-      <hr style={{ marginBottom: "20px" }} />
-      {conversation.map((message) => {
-        return (
-          <>
-            {message.role === "user" ? (
-              <UserChoice choice={message.content} />
-            ) : (
-              <StoryMessage
-                firstMessage={conversation[0].content}
-                content={message.content}
-              />
-            )}
-            <hr style={{ marginBottom: "20px" }} />
-          </>
-        );
-      })}
+      <Line style={{ marginBottom: "20px", marginTop: "20px" }} />
+      {conversation.map((message, index) =>
+        renderMessage(message, index, conversation[0].content)
+      )}
       {loading && <StoryText>Loading...</StoryText>}
       {!loading && !end && (
         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -65,5 +56,29 @@ export const Story = ({
         </StoryText>
       )}
     </>
+  );
+};
+
+const renderMessage = (
+  message: Message,
+  index: number,
+  firstMessageContent: string
+) => {
+  if (message.role == "user") {
+    return (
+      <div key={`usermessage-${index}`}>
+        <UserChoice choice={message.content} />
+        <Line />
+      </div>
+    );
+  }
+  return (
+    <div key={`storymessage-${index}`}>
+      <StoryMessage
+        firstMessageContent={firstMessageContent}
+        content={message.content}
+      />
+      <Line />
+    </div>
   );
 };
