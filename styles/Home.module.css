@@ -37,7 +37,7 @@
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
-  max-width: 850px;
+  max-width: 1000px;
   white-space: pre-line;
 }
 

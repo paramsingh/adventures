@@ -22,8 +22,9 @@ export const StoryMessage = ({
       style={{
         display: "flex",
         flexDirection: "row",
-        gap: "5px",
+        gap: "15px",
         flexWrap: "wrap",
+        marginBottom: "20px",
       }}
     >
       {imageURL && (
@@ -32,7 +33,9 @@ export const StoryMessage = ({
           style={{ marginBottom: "5px", maxHeight: "256px", width: "auto" }}
         />
       )}
-      <StoryText>{content}</StoryText>
+      <div style={{ maxWidth: "650px" }}>
+        <StoryText>{content}</StoryText>
+      </div>
     </div>
   );
 };
