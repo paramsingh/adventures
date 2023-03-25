@@ -18,7 +18,14 @@ export const StoryMessage = ({
     );
   }, [content, firstMessage]);
   return (
-    <div style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        gap: "5px",
+        flexWrap: "wrap",
+      }}
+    >
       {imageURL && (
         <img
           src={imageURL}
