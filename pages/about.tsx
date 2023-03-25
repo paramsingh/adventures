@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { StoryText } from "@/components/Story";
+import { Line, StoryText } from "@/components/Story";
 import Link from "next/link";
 
 export default function About() {
@@ -25,7 +25,7 @@ export default function About() {
               Get back to playing.
             </Link>
           </StoryText>
-          <hr />
+          <Line />
           <StoryText>
             Every day, a new prompt starts the game for everyone. Things diverge
             from there. Your choices define where the story goes.
@@ -41,7 +41,7 @@ export default function About() {
             . If you have requests for particular prompts or stories, let me
             know.
           </StoryText>
-          <hr />
+          <Line />
         </div>
       </main>
     </>
