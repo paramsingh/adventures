@@ -7,7 +7,7 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>Param's Adventures | About</title>
+        <title>Param&apos;s Adventures | About</title>
         <meta
           name="description"
           content="adventure games every day, infinite zork with images, by AI"

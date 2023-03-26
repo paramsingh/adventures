@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Param's Adventures</title>
+        <title>Param&apos;s Adventures</title>
         <meta
           name="description"
           content="adventures every day, infinite zork but with images, by AI"
