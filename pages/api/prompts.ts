@@ -76,6 +76,16 @@ You feel a surge of excitement and fear. You have always wanted to do something 
       "You awaken on an abandoned spaceship. The alarms are blaring, and the air is thick with smoke. What do you do? \n\n1) Look for an escape pod\n2) Try to find the source of the smoke\n3) Search for any other survivors\n4) Check the ship's logs for clues",
   },
   {
+    prompt: `You are a young warrior from the kingdom of Magadha, one of the most powerful and prosperous realms in ancient India. You have been chosen by your king to join an expedition to the mysterious land of Patala, where legends say that a hidden treasure awaits. You have always dreamed of seeing the wonders of the world and proving your courage and skill in battle. You board a ship with your fellow warriors and set sail for the unknown.
+
+What do you do next?
+
+1. Talk to your captain and learn more about the mission.
+2. Explore the ship and see what you can find.
+3. Practice your fighting skills with a sparring partner.
+4. Meditate and pray for a safe and successful journey.`,
+  },
+  {
     prompt:
       "You find yourself on an unknown planet, surrounded by strange creatures. Your communication device is broken, and you have limited supplies. What's your next move? \n\n1) Try to repair the communication device\n2) Hide and wait for rescue\n3) Look for food and water\n4) Fight the creatures to survive",
   },
