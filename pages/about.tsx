@@ -7,8 +7,11 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>Text Adventures</title>
-        <meta name="description" content="text adventures every day" />
+        <title>Param's Adventures | About</title>
+        <meta
+          name="description"
+          content="adventure games every day, infinite zork with images, by AI"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -41,8 +41,11 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Text Adventures</title>
-        <meta name="description" content="text adventures every day" />
+        <title>Param's Adventures</title>
+        <meta
+          name="description"
+          content="adventures every day, infinite zork but with images, by AI"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
