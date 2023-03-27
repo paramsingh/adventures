@@ -96,7 +96,7 @@ export default async function handler(
   });
 
   if (completion.status !== 200) {
-    res.status(500).json({ message: "OpenAI error" });
+    res.status(500).json({ message: "Something went wrong" });
     return;
   }
   const answer = completion.data.choices[0].message as Message;

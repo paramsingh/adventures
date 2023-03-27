@@ -21,10 +21,21 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    getAdventure(conversation).then((data) => {
-      setConversation(data);
-      setLoading(false);
-    });
+    getAdventure(conversation)
+      .then((data) => {
+        setConversation(data);
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+        setConversation([
+          ...conversation,
+          {
+            role: "system",
+            content: "Something went wrong, please reload and try again. :(",
+          },
+        ]);
+      });
   }, []);
 
   const choose = (choice: number) => {

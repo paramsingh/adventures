@@ -26,8 +26,14 @@ export const Story = ({
   loading: boolean;
   choose: (option: number) => void;
 }) => {
-  const end =
-    conversation[conversation.length - 1]?.content.includes("The End");
+  const lastMessage = conversation[conversation.length - 1]?.content;
+  let end = true;
+  if (lastMessage) {
+    end =
+      lastMessage.includes("The End") ||
+      lastMessage === "Something went wrong, please reload and try again. :(";
+  }
+
   return (
     <>
       <Line style={{ marginBottom: "20px", marginTop: "20px" }} />
