@@ -73,6 +73,10 @@ export default async function handler(
     model: "gpt-3.5-turbo",
     messages: [systemMessage, firstMessage, ...userConversation],
   });
+  if (completion.status !== 200) {
+    res.status(500).json({ message: "OpenAI error" });
+    return;
+  }
   const answer = completion.data.choices[0].message as Message;
   res.status(200).json([...userConversation, answer]);
 }
