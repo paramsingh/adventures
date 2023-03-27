@@ -90,8 +90,11 @@ What do you do next?
 4. Meditate and pray for a safe and successful journey.`,
   },
   {
-    prompt:
-      "You are on a mission to explore an uncharted planet. While surveying the area, you stumble upon an underground facility that looks abandoned. What do you do? \n\n1) Investigate the facility\n2) Report back to your team\n3) Ignore the facility and continue exploring\n4) Set up a perimeter and stay put.",
+    prompt: `You are a cunning politician who has been elected to lead your city-state of Thebes. You have to deal with the threats and challenges from other city-states and foreign powers. You have a speech, a coin, and a dagger. What do you do?
+1. Use your speech to persuade and inspire your people, and rally them behind your cause.
+2. Use your coin to bribe and corrupt your enemies, and make them work for your interests.
+3. Use your dagger to assassinate and eliminate your rivals, and secure your power.
+4. Use all three tools, and balance them according to the situation.`,
   },
   {
     prompt: `You are a rebel leader in a futuristic dystopia where the government controls everything with an army of robots. You have infiltrated a secret facility where they are developing a new weapon that could wipe out the resistance. You have a few minutes to sabotage their plans before they discover you. What do you do?
@@ -113,13 +116,6 @@ What do you do next?
 2. Tell the king what he wants to hear, and try to gain his trust and influence.
 3. Tell the king nothing, and let him figure out things for himself.
 4. Tell the king a riddle, and make him solve it before you give him any advice.`,
-  },
-  {
-    prompt: `You are a cunning politician who has been elected to lead your city-state of Thebes. You have to deal with the threats and challenges from other city-states and foreign powers. You have a speech, a coin, and a dagger. What do you do?
-1. Use your speech to persuade and inspire your people, and rally them behind your cause.
-2. Use your coin to bribe and corrupt your enemies, and make them work for your interests.
-3. Use your dagger to assassinate and eliminate your rivals, and secure your power.
-4. Use all three tools, and balance them according to the situation.`,
   },
   {
     prompt: `You are a colonist who has been living on Mars for a few years. You have to deal with the harsh environment, the limited resources, and the isolation from Earth. You have a suit, a rover, and a radio. What do you do when you encounter a group of hostile aliens who want to destroy your colony?
