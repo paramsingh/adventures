@@ -26,9 +26,9 @@ export const Story = ({
   loading: boolean;
   choose: (option: number) => void;
 }) => {
-  const lastMessage = conversation[conversation.length - 1]?.content;
-  let end = true;
-  if (lastMessage) {
+  let end = false;
+  if (conversation.length === 0) {
+    const lastMessage = conversation[conversation.length - 1].content;
     end =
       lastMessage.includes("The End") ||
       lastMessage === "Something went wrong, please reload and try again. :(";
