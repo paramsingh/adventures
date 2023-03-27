@@ -27,7 +27,7 @@ export const Story = ({
   choose: (option: number) => void;
 }) => {
   let end = false;
-  if (conversation.length === 0) {
+  if (conversation.length !== 0) {
     const lastMessage = conversation[conversation.length - 1].content;
     end =
       lastMessage.includes("The End") ||

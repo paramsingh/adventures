@@ -90,14 +90,6 @@ What do you do next?
 4. Meditate and pray for a safe and successful journey.`,
   },
   {
-    prompt: `You are a cunning politician who has been elected to lead your city-state of Thebes, a glorious part of the ancient Greek civilization. You have to deal with the threats and challenges from other city-states and foreign powers. You have a speech, a coin, and a dagger. What do you do?
-
-1. Use your speech to persuade and inspire your people, and rally them behind your cause.
-2. Use your coin to bribe and corrupt your enemies, and make them work for your interests.
-3. Use your dagger to assassinate and eliminate your rivals, and secure your power.
-4. Use all three tools, and balance them according to the situation.`,
-  },
-  {
     prompt: `You are a rebel leader in a futuristic dystopia where the government controls everything with an army of robots. You have infiltrated a secret facility where they are developing a new weapon that could wipe out the resistance. You have a few minutes to sabotage their plans before they discover you. What do you do?
 
 1. Plant a bomb in the weapon’s core and run for the exit.
