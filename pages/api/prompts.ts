@@ -90,7 +90,8 @@ What do you do next?
 4. Meditate and pray for a safe and successful journey.`,
   },
   {
-    prompt: `You are a cunning politician who has been elected to lead your city-state of Thebes. You have to deal with the threats and challenges from other city-states and foreign powers. You have a speech, a coin, and a dagger. What do you do?
+    prompt: `You are a cunning politician who has been elected to lead your city-state of Thebes, a glorious part of the ancient Greek civilization. You have to deal with the threats and challenges from other city-states and foreign powers. You have a speech, a coin, and a dagger. What do you do?
+
 1. Use your speech to persuade and inspire your people, and rally them behind your cause.
 2. Use your coin to bribe and corrupt your enemies, and make them work for your interests.
 3. Use your dagger to assassinate and eliminate your rivals, and secure your power.
@@ -98,6 +99,7 @@ What do you do next?
   },
   {
     prompt: `You are a rebel leader in a futuristic dystopia where the government controls everything with an army of robots. You have infiltrated a secret facility where they are developing a new weapon that could wipe out the resistance. You have a few minutes to sabotage their plans before they discover you. What do you do?
+
 1. Plant a bomb in the weapon’s core and run for the exit.
 2. Hack into the weapon’s system and reprogram it to target the government instead.
 3. Steal the weapon’s blueprints and escape with them.
@@ -105,6 +107,7 @@ What do you do next?
   },
   {
     prompt: `You are a young prince in ancient India who has been kidnapped by a rival king. He wants to force you to marry his daughter and surrender your kingdom to him. You are locked in a tower with a window overlooking his palace. You see a guard patrolling outside and a rope hanging from the ceiling. What do you do?
+
 1. Call out to the guard and try to bribe him to let you go.
 2. Tie the rope to the window and climb down to freedom.
 3. Pretend to agree to the marriage and wait for an opportunity to escape.
@@ -112,6 +115,7 @@ What do you do next?
   },
   {
     prompt: `You are a wise sage who has been invited to the court of a powerful king. He wants you to advise him on matters of state and religion. You have a reputation for being honest and impartial, but you also have your own beliefs and values. You have a staff, a robe, and a book of scriptures. What do you do?
+
 1. Tell the king the truth, even if it displeases him or puts you in danger.
 2. Tell the king what he wants to hear, and try to gain his trust and influence.
 3. Tell the king nothing, and let him figure out things for himself.
@@ -119,6 +123,7 @@ What do you do next?
   },
   {
     prompt: `You are a colonist who has been living on Mars for a few years. You have to deal with the harsh environment, the limited resources, and the isolation from Earth. You have a suit, a rover, and a radio. What do you do when you encounter a group of hostile aliens who want to destroy your colony?
+
 1. Fight back with your rover’s weapons and try to defend your home.
 2. Flee with your rover and try to find a safe place to hide.
 3. Negotiate with the aliens and try to make peace with them.
