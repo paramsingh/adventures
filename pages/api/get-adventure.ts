@@ -68,16 +68,39 @@ export default async function handler(
     res.status(200).json([{ role: "assistant", content: getTodaysPrompt() }]);
     return;
   }
+
+  const userConversationWithCounts = userConversation.map((message, index) => {
+    if (message.role === "assistant") {
+      return message;
+    } else {
+      const choiceNumber = Math.ceil(index / 2);
+      let content = `Choice #${choiceNumber}: ${message.content}`;
+      if (choiceNumber === 8) {
+        content += `Let's try to end the story soon.`;
+      }
+
+      return {
+        role: "user",
+        content,
+      } as Message;
+    }
+  });
+
+  const messages = [systemMessage, firstMessage, ...userConversationWithCounts];
+  console.log(messages);
+
   const openai = getOpenAIClient();
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [systemMessage, firstMessage, ...userConversation],
+    messages: messages,
   });
+
   if (completion.status !== 200) {
     res.status(500).json({ message: "OpenAI error" });
     return;
   }
   const answer = completion.data.choices[0].message as Message;
+  console.log(answer);
   res.status(200).json([...userConversation, answer]);
 }
 
