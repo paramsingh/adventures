@@ -18,6 +18,11 @@ export default async function handler(
     size: "256x256",
   });
 
+  if (response.status !== 200) {
+    console.log("openai error", response.data);
+    res.status(500).json({ message: "OpenAI error" });
+  }
+
   res.status(200).json({ url: response.data.data[0].url });
 }
 
