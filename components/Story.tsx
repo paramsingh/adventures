@@ -61,6 +61,10 @@ export const Story = () => {
         ...conversation,
         { role: "user", content: choice.toString() },
       ]).then((fullConversation) => {
+        // if we've moved on ahead in the story, we don't want to update the newArr
+        if (conversation.length === fullConversation.length) {
+          return;
+        }
         newArr[choice - 1] = fullConversation;
         setNextOptions(newArr);
       });
@@ -70,6 +74,7 @@ export const Story = () => {
   const choose = (choice: number) => {
     if (nextOptions[choice - 1] !== undefined) {
       setConversation(nextOptions[choice - 1]!);
+      setNextOptions(new Array<Message[]>(4));
       return;
     }
 
