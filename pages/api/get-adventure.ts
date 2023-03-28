@@ -87,7 +87,6 @@ export default async function handler(
   });
 
   const messages = [systemMessage, firstMessage, ...userConversationWithCounts];
-  console.log(messages);
 
   const openai = getOpenAIClient();
   const completion = await openai.createChatCompletion({
@@ -100,7 +99,6 @@ export default async function handler(
     return;
   }
   const answer = completion.data.choices[0].message as Message;
-  console.log(answer);
   res.status(200).json([...userConversation, answer]);
 }
 

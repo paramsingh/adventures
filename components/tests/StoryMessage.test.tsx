@@ -20,7 +20,6 @@ describe("<StoryMessage />", () => {
       );
     });
 
-    console.log(screen);
     expect(screen.getByText("this is the actual message")).toBeInTheDocument();
     expect(screen.queryByText("this is the first message")).toBeNull();
   });

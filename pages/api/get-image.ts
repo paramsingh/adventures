@@ -19,7 +19,6 @@ export default async function handler(
   });
 
   if (response.status !== 200) {
-    console.log("openai error", response.data);
     res.status(500).json({ message: "OpenAI error" });
     return;
   }
