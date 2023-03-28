@@ -1,4 +1,6 @@
+import { getAdventure } from "@/api-client";
 import { Message } from "@/pages";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { StoryMessage } from "./StoryMessage";
 import { UserChoice } from "./UserChoice";
@@ -17,15 +19,72 @@ export const Line = styled.hr`
   margin-top: 20px;
 `;
 
-export const Story = ({
-  conversation,
-  loading,
-  choose,
-}: {
-  conversation: Message[];
-  loading: boolean;
-  choose: (option: number) => void;
-}) => {
+export const Story = () => {
+  const [conversation, setConversation] = useState<Message[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [nextOptions, setNextOptions] = useState<(Message[] | undefined)[]>(
+    new Array<Message[]>(4)
+  );
+
+  useEffect(() => {
+    setLoading(true);
+    getAdventure(conversation)
+      .then((data) => {
+        setConversation(data);
+        setLoading(false);
+      })
+      .catch((e) => {
+        setLoading(false);
+        setConversation([
+          ...conversation,
+          {
+            role: "system",
+            content: "Something went wrong, please reload and try again. :(",
+          },
+        ]);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (conversation.length === 0) {
+      return;
+    }
+
+    if (conversation[conversation.length - 1].role !== "assistant") {
+      return;
+    }
+
+    // prefetch options
+    let newArr = new Array<Message[] | undefined>(4);
+    [1, 2, 3, 4].forEach((choice) => {
+      getAdventure([
+        ...conversation,
+        { role: "user", content: choice.toString() },
+      ]).then((fullConversation) => {
+        newArr[choice - 1] = fullConversation;
+        setNextOptions(newArr);
+      });
+    });
+  }, [conversation]);
+
+  const choose = (choice: number) => {
+    if (nextOptions[choice - 1] !== undefined) {
+      setConversation(nextOptions[choice - 1]!);
+      return;
+    }
+
+    setLoading(true);
+    getAdventure([
+      ...conversation,
+      { role: "user", content: choice.toString() },
+    ]).then((conversation) => {
+      setConversation(conversation);
+      setLoading(false);
+
+      setNextOptions(new Array<Message[]>(4));
+    });
+  };
+
   let end = false;
   if (conversation.length !== 0) {
     const lastMessage = conversation[conversation.length - 1].content;

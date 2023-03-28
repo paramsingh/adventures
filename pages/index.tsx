@@ -1,8 +1,5 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { useEffect, useState } from "react";
-import { getAdventure } from "@/api-client";
-import Link from "next/link";
 import { Story, StoryText } from "@/components/Story";
 import styled from "styled-components";
 
@@ -16,39 +13,6 @@ export type Message = {
 };
 
 export default function Home() {
-  const [conversation, setConversation] = useState<Message[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setLoading(true);
-    getAdventure(conversation)
-      .then((data) => {
-        setConversation(data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(false);
-        setConversation([
-          ...conversation,
-          {
-            role: "system",
-            content: "Something went wrong, please reload and try again. :(",
-          },
-        ]);
-      });
-  }, []);
-
-  const choose = (choice: number) => {
-    setLoading(true);
-    getAdventure([
-      ...conversation,
-      { role: "user", content: choice.toString() },
-    ]).then((conversation) => {
-      setConversation(conversation);
-      setLoading(false);
-    });
-  };
-
   return (
     <>
       <Head>
@@ -87,11 +51,7 @@ export default function Home() {
             </AlwaysUnderlinedLink>{" "}
             here.
           </StoryText>
-          <Story
-            conversation={conversation}
-            loading={loading}
-            choose={choose}
-          />
+          <Story />
         </div>
       </main>
     </>
