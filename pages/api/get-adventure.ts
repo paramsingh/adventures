@@ -118,8 +118,3 @@ const getNumberOfDays = () => {
 
   return diffDays;
 };
-
-const getAnswerChatGPT = async (
-  messages: Message[],
-  openai: OpenAIApi
-): Promise<Message> => {};
