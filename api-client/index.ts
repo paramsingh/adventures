@@ -21,7 +21,7 @@ export const getAdventure = async (
 export const getImage = async (
   content: string,
   firstMessage: string
-): Promise<{ url: string }> => {
+): Promise<{ url: string; prompt: string }> => {
   for (let i = 0; i < RETRY_COUNT; i++) {
     const response = await fetch("/api/get-image", {
       method: "POST",

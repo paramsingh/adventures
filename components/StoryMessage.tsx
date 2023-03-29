@@ -9,7 +9,8 @@ export const StoryMessage = ({
   content: string;
   firstMessageContent: string;
 }) => {
-  const [imageURL, setImageURL] = useState<string | null>(null);
+  const [imageURL, setImageURL] = useState<string>("/loading-image.png");
+  const [prompt, setPrompt] = useState<string>("loading...");
 
   // this effect gets the image from Dall-E
   useEffect(() => {
@@ -19,6 +20,7 @@ export const StoryMessage = ({
 
     getImage(contentWithoutOptions, firstMessageWithoutOptions).then((data) => {
       setImageURL(data.url);
+      setPrompt(data.prompt);
     });
   }, [content, firstMessageContent]);
 
@@ -33,12 +35,12 @@ export const StoryMessage = ({
         justifyContent: "center",
       }}
     >
-      {imageURL && (
-        <img
-          src={imageURL}
-          style={{ marginBottom: "5px", maxHeight: "256px", width: "auto" }}
-        />
-      )}
+      <img
+        src={imageURL}
+        style={{ marginBottom: "5px", maxHeight: "256px", width: "auto" }}
+        alt={prompt}
+        title={prompt}
+      />
       <div style={{ maxWidth: "650px" }}>
         <StoryText>{content}</StoryText>
       </div>

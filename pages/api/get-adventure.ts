@@ -44,6 +44,8 @@ Make the game as imaginative and compelling as you can. Now start the game as if
 
 type Response = Message[] | Error;
 
+const USE_GPT4 = false;
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Response>
@@ -90,15 +92,14 @@ export default async function handler(
 
   const openai = getOpenAIClient();
   const completion = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: USE_GPT4 ? "gpt-4" : "gpt-3.5-turbo",
     messages: messages,
   });
-
   if (completion.status !== 200) {
-    res.status(500).json({ message: "Something went wrong" });
-    return;
+    throw new Error("Something went wrong");
   }
   const answer = completion.data.choices[0].message as Message;
+
   res.status(200).json([...userConversation, answer]);
 }
 
@@ -117,3 +118,8 @@ const getNumberOfDays = () => {
 
   return diffDays;
 };
+
+const getAnswerChatGPT = async (
+  messages: Message[],
+  openai: OpenAIApi
+): Promise<Message> => {};

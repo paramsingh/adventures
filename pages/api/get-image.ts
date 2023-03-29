@@ -23,7 +23,7 @@ export default async function handler(
     return;
   }
 
-  res.status(200).json({ url: response.data.data[0].url });
+  res.status(200).json({ url: response.data.data[0].url, prompt });
 }
 
 const getPrompt = async (
