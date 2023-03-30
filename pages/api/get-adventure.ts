@@ -44,8 +44,6 @@ Make the game as imaginative and compelling as you can. Now start the game as if
 
 type Response = Message[] | Error;
 
-const USE_GPT4 = false;
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Response>
@@ -65,7 +63,9 @@ export default async function handler(
     content: SYSTEM_PROMPT,
   };
 
-  const userConversation = JSON.parse(req.body) as Message[];
+  const data = JSON.parse(req.body);
+  const userConversation = data.conversation as Message[];
+  const useGPT4 = data.useGPT4 as boolean;
   if (userConversation.length === 0) {
     res.status(200).json([{ role: "assistant", content: getTodaysPrompt() }]);
     return;
@@ -92,7 +92,7 @@ export default async function handler(
 
   const openai = getOpenAIClient();
   const completion = await openai.createChatCompletion({
-    model: USE_GPT4 ? "gpt-4" : "gpt-3.5-turbo",
+    model: useGPT4 ? "gpt-4" : "gpt-3.5-turbo",
     messages: messages,
   });
   if (completion.status !== 200) {

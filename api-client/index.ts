@@ -2,12 +2,13 @@ import { Message } from "@/pages";
 
 const RETRY_COUNT = 2;
 export const getAdventure = async (
-  conversation: Message[]
+  conversation: Message[],
+  useGPT4: boolean
 ): Promise<Message[]> => {
   for (let i = 0; i < RETRY_COUNT; i++) {
     const response = await fetch("/api/get-adventure", {
       method: "POST",
-      body: JSON.stringify(conversation),
+      body: JSON.stringify({ conversation, useGPT4 }),
     });
     if (response.status === 200) {
       return response.json();

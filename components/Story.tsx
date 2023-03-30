@@ -19,7 +19,7 @@ export const Line = styled.hr`
   margin-top: 20px;
 `;
 
-export const Story = () => {
+export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [nextOptions, setNextOptions] = useState<(Message[] | undefined)[]>(
@@ -28,7 +28,7 @@ export const Story = () => {
 
   useEffect(() => {
     setLoading(true);
-    getAdventure(conversation)
+    getAdventure(conversation, useGPT4)
       .then((data) => {
         setConversation(data);
         setLoading(false);
@@ -57,10 +57,10 @@ export const Story = () => {
     // prefetch options
     let newArr = new Array<Message[] | undefined>(4);
     [1, 2, 3, 4].forEach((choice) => {
-      getAdventure([
-        ...conversation,
-        { role: "user", content: choice.toString() },
-      ]).then((fullConversation) => {
+      getAdventure(
+        [...conversation, { role: "user", content: choice.toString() }],
+        useGPT4
+      ).then((fullConversation) => {
         // if we've moved on ahead in the story, we don't want to update the newArr
         if (conversation.length === fullConversation.length) {
           return;
@@ -79,10 +79,10 @@ export const Story = () => {
     }
 
     setLoading(true);
-    getAdventure([
-      ...conversation,
-      { role: "user", content: choice.toString() },
-    ]).then((conversation) => {
+    getAdventure(
+      [...conversation, { role: "user", content: choice.toString() }],
+      useGPT4
+    ).then((conversation) => {
       setConversation(conversation);
       setLoading(false);
 
