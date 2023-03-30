@@ -51,7 +51,7 @@ export default function Home() {
             </AlwaysUnderlinedLink>{" "}
             here.
           </StoryText>
-          <Story />
+          <Story useGPT4={false} />
         </div>
       </main>
     </>
