@@ -46,6 +46,11 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   }, []);
 
   useEffect(() => {
+    // not prefetching if using gpt-4
+    if (useGPT4) {
+      return;
+    }
+
     if (conversation.length === 0) {
       return;
     }
@@ -72,7 +77,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   }, [conversation]);
 
   const choose = (choice: number) => {
-    if (nextOptions[choice - 1] !== undefined) {
+    if (!useGPT4 && nextOptions[choice - 1] !== undefined) {
       setConversation(nextOptions[choice - 1]!);
       setNextOptions(new Array<Message[]>(4));
       return;
