@@ -32,6 +32,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.code}>
+          {/* TODO: fix this shit */}
           <StoryText>
             Created by{" "}
             <AlwaysUnderlinedLink href="https://twitter.com/iliekcomputers">

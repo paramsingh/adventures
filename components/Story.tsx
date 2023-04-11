@@ -74,7 +74,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   const choose = (choice: number) => {
     if (nextOptions[choice - 1] !== undefined) {
       setConversation(nextOptions[choice - 1]!);
-      setNextOptions(new Array<Message[]>(4));
+      setNextOptions(new Array<Message[] | undefined>(4));
       return;
     }
 
