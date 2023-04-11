@@ -30,8 +30,8 @@ Once the story is finished, send a message to the user that ends with "The End" 
 `;
 
 const PROMPT = `
-Play a text based adventure game with me and try to make it as interesting as possible. The genre of the game
-is ${todaysPrompt.genre}.
+Play a text based adventure game with me and try to make it as interesting as possible. The genre of the story
+of the game is ${todaysPrompt.genre}.
 
 Give me 4 choices on what to do. Wait and ask me for what choice I want to make.
 Move the story forward according to my choice and give me more choices.
