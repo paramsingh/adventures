@@ -48,7 +48,7 @@ def query_gpt(prompt):
 
 # Function to append the output to a JSON file
 def write_to_json(file_path, prompt):
-    data = {"prompt": prompt}
+    data = {"prompt": prompt, "genre": TODAYS_GENRE}
 
     with open(file_path, "w") as file:
         json.dump(data, file, indent=2)
