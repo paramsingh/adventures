@@ -39,6 +39,7 @@ Repeat this until the game ends. Try to end the game with a reasonable conclusio
 around the time I have made a total 10 choices. Plan your story accordingly.
 
 Make the game as imaginative and compelling as you can. Now start the game as if I didn't send you this message.
+Remember, the genre of the story is ${todaysPrompt.genre}.
 `;
 
 type Response = Message[] | Error;
