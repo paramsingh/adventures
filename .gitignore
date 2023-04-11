@@ -40,3 +40,4 @@ include/
 lib/
 pyvenv.cfg
 config.py
+__pycache__/
