@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "..";
-import { Configuration, OpenAIApi } from "openai";
-import { prompts } from "./prompts";
 import { getOpenAIClient } from "@/utils/get-openai-client";
+import todaysPrompt from "../../todays-prompt.json";
 
 type Error = {
   message: string;
@@ -104,8 +103,7 @@ export default async function handler(
 }
 
 const getTodaysPrompt = (): string => {
-  const index = getNumberOfDays() % prompts.length;
-  return prompts[index].prompt;
+  return todaysPrompt.prompt;
 };
 
 const getNumberOfDays = () => {
