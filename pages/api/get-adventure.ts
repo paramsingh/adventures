@@ -105,14 +105,3 @@ export default async function handler(
 const getTodaysPrompt = (): string => {
   return todaysPrompt.prompt;
 };
-
-const getNumberOfDays = () => {
-  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-  const firstDate = new Date("2023-03-17");
-  const secondDate = new Date();
-  const diffDays = Math.round(
-    Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay)
-  );
-
-  return diffDays;
-};
