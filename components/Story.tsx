@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { StoryMessage } from "./StoryMessage";
 import { UserChoice } from "./UserChoice";
+import { StreamingStory } from "./StreamingStory";
 
 export const Button = styled.button`
   margin-right: 10px;
@@ -25,6 +26,8 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   const [nextOptions, setNextOptions] = useState<(Message[] | undefined)[]>(
     new Array<Message[]>(4)
   );
+  const [renderStream, setRenderStream] = useState<boolean>(false);
+  const [streamChoice, setStreamChoice] = useState<number>(0);
 
   useEffect(() => {
     setLoading(true);
@@ -76,8 +79,18 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
     });
   }, [conversation]);
 
+  const onDone = () => {
+    setStreamChoice(0);
+  };
+
   const choose = (choice: number) => {
-    if (!useGPT4 && nextOptions[choice - 1] !== undefined) {
+    if (useGPT4) {
+      setStreamChoice(choice);
+      setRenderStream(true);
+      return;
+    }
+
+    if (nextOptions[choice - 1] !== undefined) {
       setConversation(nextOptions[choice - 1]!);
       setNextOptions(new Array<Message[]>(4));
       return;
@@ -108,6 +121,14 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
       <Line style={{ marginBottom: "20px", marginTop: "20px" }} />
       {conversation.map((message, index) =>
         renderMessage(message, index, conversation[0].content)
+      )}
+      {useGPT4 && renderStream && (
+        <StreamingStory
+          useGPT4={useGPT4}
+          choice={streamChoice}
+          conversation={conversation}
+          onDone={onDone}
+        />
       )}
       {loading && <StoryText>Loading...</StoryText>}
       {!loading && !end && (

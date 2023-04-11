@@ -2,7 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "..";
 import { Configuration, OpenAIApi } from "openai";
 import { prompts } from "./prompts";
-import { getOpenAIClient } from "@/utils/get-openai-client";
+import { getOpenAIClient, getOpenAIKey } from "@/utils/get-openai-client";
+import { OpenAI } from "openai-streams/node";
 
 type Error = {
   message: string;
@@ -90,17 +91,29 @@ export default async function handler(
 
   const messages = [systemMessage, firstMessage, ...userConversationWithCounts];
 
-  const openai = getOpenAIClient();
-  const completion = await openai.createChatCompletion({
-    model: useGPT4 ? "gpt-4" : "gpt-3.5-turbo",
-    messages: messages,
-  });
-  if (completion.status !== 200) {
-    throw new Error("Something went wrong");
-  }
-  const answer = completion.data.choices[0].message as Message;
+  if (!useGPT4) {
+    const openai = getOpenAIClient();
+    const completion = await openai.createChatCompletion({
+      model: useGPT4 ? "gpt-4" : "gpt-3.5-turbo",
+      messages: messages,
+    });
+    if (completion.status !== 200) {
+      throw new Error("Something went wrong");
+    }
+    const answer = completion.data.choices[0].message as Message;
 
-  res.status(200).json([...userConversation, answer]);
+    res.status(200).json([...userConversation, answer]);
+  } else {
+    const stream = await OpenAI(
+      "chat",
+      {
+        model: "gpt-4",
+        messages: userConversationWithCounts,
+      },
+      { apiKey: getOpenAIKey() }
+    );
+    stream.pipe(res);
+  }
 }
 
 const getTodaysPrompt = (): string => {
