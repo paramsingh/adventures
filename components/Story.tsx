@@ -124,6 +124,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
             onClick={() => {
               setConversation(conversation.slice(0, 1));
               setImageLinks([]);
+              setNextOptions(new Array<Message[] | undefined>(4));
             }}
             style={{ textDecoration: "underline", cursor: "pointer" }}
           >
