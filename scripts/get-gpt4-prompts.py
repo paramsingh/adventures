@@ -25,17 +25,12 @@ and Choices is a list of choices the user can make. The choices should always be
 
 Don't talk to the user or mention that it's a game. Start with the story directly."""
 
-# Replace with your API key
-
-# Configure the OpenAI API client
 openai.api_key = OPENAI_API_KEY
 
-# Set the file path for the JSON file and the repository directory
-json_file_path = "todays-prompt.json"
-repo_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+JSON_FILE_PATH = "todays-prompt.json"
+REPO_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 
 
-# Function to query GPT-4
 def query_gpt(prompt):
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -46,7 +41,6 @@ def query_gpt(prompt):
     return response.choices[0].message["content"].strip()
 
 
-# Function to append the output to a JSON file
 def write_to_json(file_path, prompt):
     data = {"prompt": prompt, "genre": TODAYS_GENRE}
 
@@ -54,23 +48,28 @@ def write_to_json(file_path, prompt):
         json.dump(data, file, indent=2)
 
 
-# Function to git commit and push changes
+def git_pull(repo_dir):
+    os.chdir(repo_dir)
+    subprocess.run(["git", "pull"])
+
+
 def git_commit_push(repo_dir, commit_message):
     os.chdir(repo_dir)
-    subprocess.run(["git", "add", json_file_path])
+    subprocess.run(["git", "add", JSON_FILE_PATH])
     subprocess.run(["git", "commit", "-m", commit_message])
     subprocess.run(["git", "push"])
 
 
 def main():
+    git_pull(REPO_DIR)
     print("Today's genre:", TODAYS_GENRE)
     with yaspin(text="Querying GPT-4...", timer=True):
         response = query_gpt(PROMPT)
     print("GPT-4 response:", response)
 
-    write_to_json(os.path.join(repo_dir, json_file_path), response)
+    write_to_json(os.path.join(REPO_DIR, JSON_FILE_PATH), response)
     git_commit_push(
-        repo_dir,
+        REPO_DIR,
         f'Update responses.json with new GPT-4 response - {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}',
     )
 
