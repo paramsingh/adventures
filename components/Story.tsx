@@ -22,9 +22,14 @@ export const Line = styled.hr`
 export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [imageLinks, setImageLinks] = useState<string[]>([]);
   const [nextOptions, setNextOptions] = useState<(Message[] | undefined)[]>(
     new Array<Message[]>(4)
   );
+
+  const onNewImageLoad = (imageLink: string) => {
+    setImageLinks([...imageLinks, imageLink]);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -102,7 +107,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
     <>
       <Line style={{ marginBottom: "20px", marginTop: "20px" }} />
       {conversation.map((message, index) =>
-        renderMessage(message, index, conversation[0].content)
+        renderMessage(message, index, conversation[0].content, onNewImageLoad)
       )}
       {loading && <StoryText>Loading...</StoryText>}
       {!loading && !end && (
@@ -117,7 +122,8 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
         <StoryText>
           <a
             onClick={() => {
-              window.location.reload();
+              setConversation(conversation.slice(0, 1));
+              setImageLinks([]);
             }}
             style={{ textDecoration: "underline", cursor: "pointer" }}
           >
@@ -132,7 +138,8 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
 const renderMessage = (
   message: Message,
   index: number,
-  firstMessageContent: string
+  firstMessageContent: string,
+  onNewImageLoad: (imageLink: string) => void
 ) => {
   if (message.role == "user") {
     return (
@@ -147,6 +154,7 @@ const renderMessage = (
       <StoryMessage
         firstMessageContent={firstMessageContent}
         content={message.content}
+        onImageLoad={onNewImageLoad}
       />
       <Line />
     </div>

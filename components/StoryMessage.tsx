@@ -5,9 +5,11 @@ import { StoryText } from "./Story";
 export const StoryMessage = ({
   content,
   firstMessageContent,
+  onImageLoad,
 }: {
   content: string;
   firstMessageContent: string;
+  onImageLoad: (imageLink: string) => void;
 }) => {
   const [imageURL, setImageURL] = useState<string>("/loading-image.png");
   const [prompt, setPrompt] = useState<string>("loading...");
@@ -21,6 +23,7 @@ export const StoryMessage = ({
     getImage(contentWithoutOptions, firstMessageWithoutOptions).then((data) => {
       setImageURL(data.url);
       setPrompt(data.prompt);
+      onImageLoad(data.url);
     });
   }, [content, firstMessageContent]);
 

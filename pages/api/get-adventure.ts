@@ -7,6 +7,8 @@ type Error = {
   message: string;
 };
 
+const MAX_MESSAGES_PER_STORY = 8;
+
 const SYSTEM_PROMPT = `
 You are an AI writer that plays text based adventure games with people. Be detailed and imaginative
 about the setting of the game and the characters in the game. Give the user as many details as possible.
@@ -21,9 +23,11 @@ Where Content is the text you want to send to the user to progress the story
 and Choices is a list of choices the user can make. The choices should always be numbered 1-4.
 The content should be as detailed as possible.
 
-It is absolutely imperative that you end the story near the 10th choice the user makes.
+It is absolutely imperative that you end the story near the ${MAX_MESSAGES_PER_STORY}th choice the user makes.
 However, use your best judgement here. Don't compromise the story for the sake of 1 extra prompt.
-Just know that the game should NOT go on for more than 15 choices. If the story is not finished,
+Just know that the game should NOT go on for more than ${
+  MAX_MESSAGES_PER_STORY + 5
+} choices. If the story is not finished,
 invent a way to end the story by making the main character die.
 
 Once the story is finished, send a message to the user that ends with "The End" in a separate line.
@@ -77,7 +81,7 @@ export default async function handler(
     } else {
       const choiceNumber = Math.ceil(index / 2);
       let content = `Choice #${choiceNumber}: ${message.content}`;
-      if (choiceNumber === 8) {
+      if (choiceNumber === MAX_MESSAGES_PER_STORY - 2) {
         content += `Let's try to end the story soon.`;
       }
 
