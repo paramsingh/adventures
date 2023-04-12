@@ -9,7 +9,16 @@ from datetime import datetime
 from yaspin import yaspin
 from config import OPENAI_API_KEY
 
-GENRES = ["scifi", "romance", "adventure", "fantasy", "horror", "mystery", "thriller"]
+GENRES = [
+    "scifi",
+    "romance",
+    "adventure",
+    "fantasy",
+    "horror",
+    "mystery",
+    "thriller",
+    "space scifi",
+]
 TODAYS_GENRE = random.choice(GENRES)
 PROMPT = f"""You are an AI writer that plays text based adventure games with people. Be detailed and imaginative about the setting of the game and the characters in the game. Try to make the story interesting and action-packed from the beginning.
 
