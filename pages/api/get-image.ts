@@ -41,12 +41,12 @@ ${firstMessage}
 
 
 This is the current text of the game:
-Text:
+Current Text:
 ${content}
 ===========
 
-Use the text to write a small succinct description of the main object of the text, that can be used as a Dall-E prompt. Write just the description of the current scene, nothing else. Use the first message to set the context if needed.
-End your prompt with ", digital art".
+Use the text to write a small succinct description of the main object of the current text, that can be used as a Dall-E prompt. Write just the description of the current scene, nothing else. Use the first message to set the context if needed.
+End your prompt with ", digital art". Remember, you should describe the current text (using the first message to set the context if needed), not the first message itself.
 `;
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
