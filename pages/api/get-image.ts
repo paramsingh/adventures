@@ -45,8 +45,12 @@ Current Text:
 ${content}
 ===========
 
-Use the text to write a small succinct description of the main object of the current text, that can be used as a Dall-E prompt. Write just the description of the current scene, nothing else. Use the first message to set the context if needed.
+Use the text to write a small succinct description of the scene set by the current text, that can be used as a Dall-E prompt. Write just the description of the current text, nothing else. Use the first message to set the context if needed.
 End your prompt with ", digital art". Remember, you should describe the current text (using the first message to set the context if needed), not the first message itself.
+
+If there are multiple objects in the current text, try to choose the one that is the most action packed, or the one that is the most interesting to describe.
+
+It is important that you don't use the word "you" in the prompt. Always describe the scene while using "a person" wherever you need to use the word "you".
 `;
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
