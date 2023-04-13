@@ -7,7 +7,7 @@ type Error = {
   message: string;
 };
 
-const MAX_MESSAGES_PER_STORY = 8;
+const MAX_MESSAGES_PER_STORY = 6;
 
 const SYSTEM_PROMPT = `
 You are an AI writer that plays text based adventure games with people. Be detailed and imaginative
@@ -40,7 +40,7 @@ of the game is ${todaysPrompt.genre}.
 Give me 4 choices on what to do. Wait and ask me for what choice I want to make.
 Move the story forward according to my choice and give me more choices.
 Repeat this until the game ends. Try to end the game with a reasonable conclusion
-around the time I have made a total 10 choices. Plan your story accordingly.
+around the time I have made a total ${MAX_MESSAGES_PER_STORY} choices. Plan your story accordingly.
 
 Make the game as imaginative and compelling as you can. Now start the game as if I didn't send you this message.
 Remember, the genre of the story is ${todaysPrompt.genre}.
