@@ -52,5 +52,5 @@ export const StoryMessage = ({
 };
 
 const removeOptionsFromContent = (content: string) => {
-  return content.split("\n").slice(0, -1).join("\n");
+  return content.split("\n").slice(0, -4).join("\n");
 };
