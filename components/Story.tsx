@@ -61,15 +61,17 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
 
     // prefetch options
     let newArr = new Array<Message[] | undefined>(4);
+    setNextOptions(newArr);
     [1, 2, 3, 4].forEach((choice) => {
       getAdventure(
         [...conversation, { role: "user", content: choice.toString() }],
         useGPT4
       ).then((fullConversation) => {
         // if we've moved on ahead in the story, we don't want to update the newArr
-        if (conversation.length === fullConversation.length) {
+        if (conversation.length >= fullConversation.length) {
           return;
         }
+        // don't need to setNextOptions(newArr) because nextOptions is a reference
         newArr[choice - 1] = fullConversation;
         setNextOptions(newArr);
       });
@@ -77,7 +79,10 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
   }, [conversation]);
 
   const choose = (choice: number) => {
-    if (nextOptions[choice - 1] !== undefined) {
+    if (
+      nextOptions[choice - 1] &&
+      conversation.length < nextOptions[choice - 1]!.length
+    ) {
       setConversation(nextOptions[choice - 1]!);
       setNextOptions(new Array<Message[] | undefined>(4));
       return;
@@ -91,7 +96,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
       setConversation(conversation);
       setLoading(false);
 
-      setNextOptions(new Array<Message[]>(4));
+      setNextOptions(new Array<Message[] | undefined>(4));
     });
   };
 
