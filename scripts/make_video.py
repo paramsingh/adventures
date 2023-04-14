@@ -4,6 +4,10 @@ from moviepy.editor import ImageClip, concatenate_videoclips, AudioFileClip, afx
 from PIL import Image
 import numpy as np
 from gtts import gTTS
+from config import OPENAI_API_KEY
+import openai
+
+openai.api_key = OPENAI_API_KEY
 
 
 def tts_to_audio_file(text, audio_filename):
@@ -17,17 +21,41 @@ def download_image(image_url):
     return Image.open(BytesIO(response.content))
 
 
+def generate_summary(text):
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {
+                "role": "user",
+                "content": f"""
+Please summarize the following text into 40 words or so:
+
+Text:
+
+{text}
+
+Be concise, only reply with the summary, say nothing else.
+""",
+            }
+        ],
+    )
+    return response.choices[0].message["content"].strip()
+
+
 def create_video_from_images(images_text, output_filename):
     clips = []
 
     for index, (image_url, text) in enumerate(images_text):
         audio_filename = f"audio_{index}.mp3"
-        tts_to_audio_file(text, audio_filename)
+        summary = generate_summary(text)
+        print(summary)
+        tts_to_audio_file(summary, audio_filename)
 
         image = download_image(image_url)
         image_np = np.array(image)
         audio_clip = AudioFileClip(audio_filename)
-        speed_factor = 1.5
+        speed_factor = 1.25
+
         audio_clip = vfx.speedx(audio_clip, speed_factor)
 
         image_clip = ImageClip(image_np, duration=audio_clip.duration)
