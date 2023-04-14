@@ -41,3 +41,6 @@ lib/
 pyvenv.cfg
 config.py
 __pycache__/
+
+*.mp4
+*.mp3
