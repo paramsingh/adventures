@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { StoryMessage } from "./StoryMessage";
 import { UserChoice } from "./UserChoice";
+import { removeOptionsFromContent } from "@/utils/remove-options-from-content";
 
 export const Button = styled.button`
   margin-right: 10px;
@@ -106,6 +107,18 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
     end =
       lastMessage.includes("The End") ||
       lastMessage === "Something went wrong, please reload and try again. :(";
+  }
+
+  if (end) {
+    const videoData = conversation
+      .filter((message) => message.role !== "user")
+      .map((message, i) => {
+        return {
+          text: removeOptionsFromContent(message.content),
+          image: imageLinks[i],
+        };
+      });
+    console.log(JSON.stringify(videoData, null, 2));
   }
 
   return (

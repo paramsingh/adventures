@@ -1,6 +1,7 @@
 import { getImage } from "@/api-client";
 import { useEffect, useState } from "react";
 import { StoryText } from "./Story";
+import { removeOptionsFromContent } from "@/utils/remove-options-from-content";
 
 export const StoryMessage = ({
   content,
@@ -49,8 +50,4 @@ export const StoryMessage = ({
       </div>
     </div>
   );
-};
-
-const removeOptionsFromContent = (content: string) => {
-  return content.split("\n").slice(0, -4).join("\n");
 };
