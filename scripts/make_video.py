@@ -18,7 +18,7 @@ def tts_to_audio_file(text, audio_filename):
 
 
 def tts_to_audio_file_elevenlabs(text, audio_filename):
-    print("calling elevenlabs")
+    print("Calling elevenlabs...")
     r = requests.post(
         f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}",
         json={
@@ -29,7 +29,7 @@ def tts_to_audio_file_elevenlabs(text, audio_filename):
     r.raise_for_status()
     with open(audio_filename, "wb") as f:
         f.write(r.content)
-    print("Done")
+    print("Done!")
 
 
 def download_image(image_url):
@@ -38,21 +38,37 @@ def download_image(image_url):
     return Image.open(BytesIO(response.content))
 
 
-def generate_summary(text):
+def generate_summary(text, previous_summaries):
+    x = "\n".join(previous_summaries).strip()
+    if x:
+        story_so_far = f"## Story so far:\n{x}\n\n"
+    else:
+        story_so_far = ""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {
                 "role": "user",
                 "content": f"""
+## Instructions
+
 Please summarize the following text into 40 words or so, in the style of a storyteller telling a story.
-Note: "You" in the story refers to the protagonist of the story. You can use "the protagonist" instead.
+The "Story so far" section provides the parts of the story that have already been told. It is very
+important that your summary meaningfully continues the story. The summary should feel like a natural
+continuation of the story and should not feel disjointed. If there is no "Story so far" section, then
+the text is the beginning of the story.
 
-Text:
-
-{text}
+Do not end the summary with a question.
 
 Be concise, only reply with the summary, say nothing else.
+
+Note: "You" in the story refers to the protagonist of the story. You should use "the protagonist" instead.
+
+{story_so_far}
+
+## Text:
+
+{text}
 """,
             }
         ],
@@ -62,12 +78,14 @@ Be concise, only reply with the summary, say nothing else.
 
 def create_video_from_images(images_text, output_filename):
     clips = []
+    previous_summaries = []
 
     for index, data in enumerate(images_text):
         image_url = data["image"]
         text = data["text"]
         audio_filename = f"audio_{index}.mp3"
-        summary = generate_summary(text)
+        summary = generate_summary(text, previous_summaries)
+        previous_summaries.append(summary)
         print(summary)
         tts_to_audio_file_elevenlabs(summary, audio_filename)
 
