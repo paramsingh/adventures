@@ -109,18 +109,6 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
       lastMessage === "Something went wrong, please reload and try again. :(";
   }
 
-  if (end) {
-    const videoData = conversation
-      .filter((message) => message.role !== "user")
-      .map((message, i) => {
-        return {
-          text: removeOptionsFromContent(message.content),
-          image: imageLinks[i],
-        };
-      });
-    console.log(JSON.stringify(videoData, null, 2));
-  }
-
   return (
     <>
       <Line style={{ marginBottom: "20px", marginTop: "20px" }} />
@@ -147,6 +135,22 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
             style={{ textDecoration: "underline", cursor: "pointer" }}
           >
             Play again?
+          </a>
+          |{" "}
+          <a
+            onClick={() => {
+              const videoData = conversation
+                .filter((message) => message.role !== "user")
+                .map((message, i) => {
+                  return {
+                    text: removeOptionsFromContent(message.content),
+                    image: imageLinks[i],
+                  };
+                });
+              console.log(JSON.stringify(videoData, null, 2));
+            }}
+          >
+            Log video data
           </a>
         </StoryText>
       )}
