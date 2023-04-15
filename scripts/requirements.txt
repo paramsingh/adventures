@@ -1,2 +1,5 @@
 openai
 yaspin
+moviepy
+pillow
+gtts
