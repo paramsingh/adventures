@@ -80,7 +80,7 @@ export default async function handler(
       return message;
     } else {
       const choiceNumber = Math.ceil(index / 2);
-      let content = `Choice #${choiceNumber}: ${message.content}`;
+      let content = `Choice #${choiceNumber}: ${message.content}. `;
       if (choiceNumber === MAX_MESSAGES_PER_STORY - 2) {
         content += `Let's try to end the story soon.`;
       }
