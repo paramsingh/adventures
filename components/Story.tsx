@@ -135,7 +135,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
             style={{ textDecoration: "underline", cursor: "pointer" }}
           >
             Play again?
-          </a>
+          </a>{" "}
           |{" "}
           <a
             onClick={() => {
@@ -149,6 +149,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
                 });
               console.log(JSON.stringify(videoData, null, 2));
             }}
+            style={{ textDecoration: "underline", cursor: "pointer" }}
           >
             Log video data
           </a>
