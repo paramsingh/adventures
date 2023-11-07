@@ -1,10 +1,10 @@
 import { getOpenAIClient } from "@/utils/get-openai-client";
 import { NextApiRequest, NextApiResponse } from "next";
-import OpenAI from "openai";
+import { OpenAIApi } from "openai";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ) {
   if (req.method !== "POST") {
     res.status(405).json({ message: "Method Not Allowed" });
@@ -12,25 +12,24 @@ export default async function handler(
   const openai = getOpenAIClient();
   const data = JSON.parse(req.body);
   const prompt = await getPrompt(openai, data.content, data.firstMessage);
-  const response = await openai.images.generate({
-    model: "dall-e-3",
+  const response = await openai.createImage({
     prompt,
     n: 1,
-    size: "1024x1024",
+    size: "256x256",
   });
 
-  if (!response) {
+  if (response.status !== 200) {
     res.status(500).json({ message: "OpenAI error" });
     return;
   }
 
-  res.status(200).json({ url: response.data[0].url, prompt });
+  res.status(200).json({ url: response.data.data[0].url, prompt });
 }
 
 const getPrompt = async (
-  openai: OpenAI,
+  openai: OpenAIApi,
   content: string,
-  firstMessage: string,
+  firstMessage: string
 ) => {
   const PROMPT = `
 An example of a Dall-E prompt is: A potato with a cute face and a party hat.
@@ -53,9 +52,9 @@ If there are multiple objects in the current text, try to choose the one that is
 
 It is important that you don't use the word "you" in the prompt. Always describe the scene while using "a person" wherever you need to use the word "you".
 `;
-  const response = await openai.chat.completions.create({
+  const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [{ role: "user", content: PROMPT }],
   });
-  return response.choices[0].message!.content!;
+  return response.data.choices[0].message!.content;
 };
