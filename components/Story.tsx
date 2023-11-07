@@ -136,23 +136,6 @@ export const Story = () => {
           >
             Play again?
           </a>{" "}
-          |{" "}
-          <a
-            onClick={() => {
-              const videoData = conversation
-                .filter((message) => message.role !== "user")
-                .map((message, i) => {
-                  return {
-                    text: removeOptionsFromContent(message.content),
-                    image: imageLinks[i],
-                  };
-                });
-              console.log(JSON.stringify(videoData, null, 2));
-            }}
-            style={{ textDecoration: "underline", cursor: "pointer" }}
-          >
-            Log video data
-          </a>
         </StoryText>
       )}
     </>
