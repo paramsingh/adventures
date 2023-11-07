@@ -69,7 +69,6 @@ export default async function handler(
 
   const data = JSON.parse(req.body);
   const userConversation = data.conversation as Message[];
-  const useGPT4 = data.useGPT4 as boolean;
   if (userConversation.length === 0) {
     res.status(200).json([{ role: "assistant", content: getTodaysPrompt() }]);
     return;
@@ -96,7 +95,7 @@ export default async function handler(
 
   const openai = getOpenAIClient();
   const completion = await openai.chat.completions.create({
-    model: useGPT4 ? "gpt-4-1106-preview" : "gpt-3.5-turbo",
+    model: "gpt-4-1106-preview",
     messages: messages,
   });
   if (!completion) {

@@ -20,12 +20,12 @@ export const Line = styled.hr`
   margin-top: 20px;
 `;
 
-export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
+export const Story = () => {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [imageLinks, setImageLinks] = useState<string[]>([]);
   const [nextOptions, setNextOptions] = useState<(Message[] | undefined)[]>(
-    new Array<Message[]>(4)
+    new Array<Message[]>(4),
   );
 
   const onNewImageLoad = (imageLink: string) => {
@@ -34,7 +34,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
 
   useEffect(() => {
     setLoading(true);
-    getAdventure(conversation, useGPT4)
+    getAdventure(conversation)
       .then((data) => {
         setConversation(data);
         setLoading(false);
@@ -64,10 +64,10 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
     let newArr = new Array<Message[] | undefined>(4);
     setNextOptions(newArr);
     [1, 2, 3, 4].forEach((choice) => {
-      getAdventure(
-        [...conversation, { role: "user", content: choice.toString() }],
-        useGPT4
-      ).then((fullConversation) => {
+      getAdventure([
+        ...conversation,
+        { role: "user", content: choice.toString() },
+      ]).then((fullConversation) => {
         // if we've moved on ahead in the story, we don't want to update the newArr
         if (conversation.length >= fullConversation.length) {
           return;
@@ -90,10 +90,10 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
     }
 
     setLoading(true);
-    getAdventure(
-      [...conversation, { role: "user", content: choice.toString() }],
-      useGPT4
-    ).then((conversation) => {
+    getAdventure([
+      ...conversation,
+      { role: "user", content: choice.toString() },
+    ]).then((conversation) => {
       setConversation(conversation);
       setLoading(false);
 
@@ -113,7 +113,7 @@ export const Story = ({ useGPT4 }: { useGPT4: boolean }) => {
     <>
       <Line style={{ marginBottom: "20px", marginTop: "20px" }} />
       {conversation.map((message, index) =>
-        renderMessage(message, index, conversation[0].content, onNewImageLoad)
+        renderMessage(message, index, conversation[0].content, onNewImageLoad),
       )}
       {loading && <StoryText>Loading...</StoryText>}
       {!loading && !end && (
@@ -163,7 +163,7 @@ const renderMessage = (
   message: Message,
   index: number,
   firstMessageContent: string,
-  onNewImageLoad: (imageLink: string) => void
+  onNewImageLoad: (imageLink: string) => void,
 ) => {
   if (message.role == "user") {
     return (

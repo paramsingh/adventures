@@ -51,7 +51,7 @@ export default function SuperSecretGPT4Stories() {
             </AlwaysUnderlinedLink>{" "}
             here.
           </StoryText>
-          <Story useGPT4 />
+          <Story />
         </div>
       </main>
     </>
