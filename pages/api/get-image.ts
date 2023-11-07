@@ -1,3 +1,4 @@
+import { createCompletion } from "@/utils/create-completion";
 import { getOpenAIClient } from "@/utils/get-openai-client";
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
@@ -52,9 +53,8 @@ If there are multiple objects in the current text, try to choose the one that is
 
 It is important that you don't use the word "you" in the prompt. Always describe the scene while using "a person" wherever you need to use the word "you".
 `;
-  const response = await openai.chat.completions.create({
-    model: "gpt-4-1106-preview",
-    messages: [{ role: "user", content: PROMPT }],
-  });
+  const response = await createCompletion(openai, [
+    { role: "user", content: PROMPT },
+  ]);
   return response.choices[0].message!.content!;
 };

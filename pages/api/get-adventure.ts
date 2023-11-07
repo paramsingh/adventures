@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "..";
 import { getOpenAIClient } from "@/utils/get-openai-client";
 import todaysPrompt from "../../todays-prompt.json";
+import { createCompletion } from "@/utils/create-completion";
 
 type Error = {
   message: string;
@@ -94,10 +95,7 @@ export default async function handler(
   const messages = [systemMessage, firstMessage, ...userConversationWithCounts];
 
   const openai = getOpenAIClient();
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4-1106-preview",
-    messages: messages,
-  });
+  const completion = await createCompletion(openai, messages);
   if (!completion) {
     throw new Error("Something went wrong");
   }
