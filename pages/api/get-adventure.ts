@@ -50,7 +50,7 @@ type Response = Message[] | Error;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response>
+  res: NextApiResponse<Response>,
 ) {
   if (req.method !== "POST") {
     res.status(405).json({ message: "Method Not Allowed" });
@@ -95,14 +95,14 @@ export default async function handler(
   const messages = [systemMessage, firstMessage, ...userConversationWithCounts];
 
   const openai = getOpenAIClient();
-  const completion = await openai.createChatCompletion({
+  const completion = await openai.chat.completions.create({
     model: useGPT4 ? "gpt-4" : "gpt-3.5-turbo",
     messages: messages,
   });
-  if (completion.status !== 200) {
+  if (!completion) {
     throw new Error("Something went wrong");
   }
-  const answer = completion.data.choices[0].message as Message;
+  const answer = completion.choices[0].message as Message;
 
   res.status(200).json([...userConversation, answer]);
 }
