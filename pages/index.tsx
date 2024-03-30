@@ -50,7 +50,10 @@ export default function Home() {
             <AlwaysUnderlinedLink href="/about">
               More details
             </AlwaysUnderlinedLink>{" "}
-            here. If you like this project, consider helping{" "}
+            here.
+          </StoryText>
+          <StoryText style={{ marginTop: "10px" }}>
+            If you like this project, consider helping{" "}
             <AlwaysUnderlinedLink href="https://buymeacoffee.com/blunderfest">
               pay the bills
             </AlwaysUnderlinedLink>
