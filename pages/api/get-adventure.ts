@@ -43,6 +43,9 @@ Move the story forward according to my choice and give me more choices.
 Repeat this until the game ends. Try to end the game with a reasonable conclusion
 around the time I have made a total ${MAX_MESSAGES_PER_STORY} choices. Plan your story accordingly.
 
+
+MAKE ABSOLUTELY SURE THAT YOU EXTEND THE STORY BASED ON THE CHOICE I MAKE. DO NOT IGNORE THE CHOICE.
+
 Make the game as imaginative and compelling as you can. Now start the game as if I didn't send you this message.
 Remember, the genre of the story is ${todaysPrompt.genre}.
 `;
